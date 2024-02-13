@@ -1,5 +1,50 @@
 <!DOCTYPE html>
 {%extends 'base.html'%}
 {%block content%}
-<h1>Login</h1>
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+                {%include 'messages/messages.html'%}
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px; max-width:80%">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Login Form</h3>
+                        <form method="POST">
+                            {%csrf_token%}
+                            <div class="row">
+                                <div class="col-md-12 mb-4 pb-2">
+
+                                    <div class="form-outline">
+                                        <label class="form-label" for="username">Username</label>
+                                        <input type="text" id="username" name="username"
+                                            placeholder="Enter your Username" class="form-control form-control-lg"
+                                            required>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mb-4 pb-2">
+
+                                    <div class="form-outline">
+                                        <label class="form-label" for="password">Password</label>
+                                        <input type="password" id="password" name="password"
+                                            placeholder="Enter your Password" class="form-control form-control-lg"
+                                            required>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-2">
+                                <button class="btn btn-success btn-block text-light border" type="submit">Login</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {%endblock%}

@@ -11,4 +11,13 @@ class Image(models.Model):
 
     def __str__(self):
 
-        return f'Owned by {self.owner.username}'
+        return f'Owned by {self.owner.username} taken at {self.location}'
+
+
+class RegisterModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    gender = models.CharField(max_length=30)
+    phone = models.IntegerField()
+
+    def __str__(self):
+        return self.user.first_name
