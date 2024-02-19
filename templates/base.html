@@ -44,13 +44,13 @@ https://templatemo.com/tm-556-catalog-z
                         <a class="nav-link nav-link-1 active" aria-current="page" href="{%url 'index'%}">Photos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-2" href="videos.html">Videos</a>
+                        <a class="nav-link nav-link-2" href="{%url 'video'%}">Videos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-3" href="about.html">About</a>
+                        <a class="nav-link nav-link-3" href="{%url 'about'%}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-4" href="contact.html">Contact</a>
+                        <a class="nav-link nav-link-4" href="{%url 'contact'%}">Contact</a>
                     </li>
                     {%if request.user.is_authenticated%}
                     <li class="nav-item">
