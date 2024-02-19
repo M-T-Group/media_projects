@@ -1,10 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Image
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-# Create your views here.
 
 # Home Page
 
@@ -19,6 +18,23 @@ def index(request):
                'image_number': image_number}
     return render(request, 'index.html', context)
 
+# Photo detail
+
+
+def PhotoDetail(request, pk):
+    image = get_object_or_404(Image, pk=pk)
+    related = Image.objects.exclude(id=image.id)
+    context = {'image': image,
+               'related': related}
+    return render(request, 'photo-detail.html', context)
+
+# Delete image
+
+
+def DeleteView(request, pk):
+    image = Image.objects.get(id=pk)
+    image.delete()
+    return redirect('index')
 # Video page
 
 
