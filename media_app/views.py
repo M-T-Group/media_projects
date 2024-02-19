@@ -22,13 +22,24 @@ def index(request):
 # Video page
 
 
+def Video(request):
+    return render(request, 'videos.html')
+
 # About page
 
+
+def AboutView(request):
+    return render(request, 'about.html')
 
 # Contact page
 
 
+def ContactView(request):
+    return render(request, 'contact.html')
+
 # Login Page
+
+
 def LoginView(request):
     if request.method == 'POST':
         username = request.POST['username']
