@@ -5,6 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
+from .forms import AddPhotoForm
 
 # Home Page
 
@@ -63,6 +64,36 @@ def AboutView(request):
 def ContactView(request):
     return render(request, 'contact.html')
 
+# Dashboard view
+
+
+def DashboardView(request):
+    page1 = 1
+    images = Image.objects.all()
+    context = {'images': images, 'page1': page1}
+    return render(request, 'dashboard.html', context)
+
+# Add photo form
+
+
+def AddPhotoView(request):
+    page2 = 2
+    photoform = AddPhotoForm()
+    if request.method == 'POST':
+        photoform = AddPhotoForm(request.POST, request.FILES or None)
+        if photoform.is_valid():
+            photo = photoform.save(commit=False)
+            photo.owner = request.user
+            photo.save()
+            messages.success(request, 'Photo Added Successfully..!')
+            return redirect('dashboard')
+        else:
+            return redirect('addphoto')
+    context = {'page2': page2,
+               'photoform': photoform}
+
+    return render(request, 'dashboard.html', context)
+
 # Login Page
 
 
@@ -74,7 +105,7 @@ def LoginView(request):
         user = authenticate(username=username, password=password)
         login(request, user)
         messages.success(request, 'Login Successfully..!')
-        return redirect('index')
+        return redirect('dashboard')
     return render(request, 'accounts/login.html')
 
 # Sign Up page
