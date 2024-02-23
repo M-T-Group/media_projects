@@ -38,7 +38,7 @@
                         class="tm-text-primary">{{image.location}}</span>
                 </div>
                 <div class="mt-4 mb-5">
-                    <a href="#" class="btn btn-primary tm-btn-big">Download</a>
+                    <a href="{%url 'download' image.id%}" class="btn btn-primary tm-btn-big">Download</a>
                 </div>
                 {%if request.user.is_authenticated and request.user == image.owner%}
                 <div>

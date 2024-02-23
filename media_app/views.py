@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 from .models import Image
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
@@ -27,6 +28,15 @@ def PhotoDetail(request, pk):
     context = {'image': image,
                'related': related}
     return render(request, 'photo-detail.html', context)
+
+
+# Download image
+def DownloadView(request, pk):
+    result = Image.objects.get(id=pk)
+    response = HttpResponse(
+        result.photo, content_type='application/force-download')
+    response['Content-Disposition'] = f'attachment; filename="{result.location}"'
+    return response
 
 # Delete image
 
