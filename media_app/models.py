@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Image(models.Model):
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to='upload')
     location = models.CharField(max_length=30)
     description = models.CharField(max_length=50)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
