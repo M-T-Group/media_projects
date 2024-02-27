@@ -5,81 +5,35 @@
 {%block content%}
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse position-relative"
+      style="height: 80vh;">
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{%url 'dashboard'%}">
+          <li class="nav-item text-center">
+            <a class="nav-link active text-light" aria-current="page" href="{%url 'dashboard'%}">
               <span data-feather="home" class="align-text-bottom"></span>
-              Dashboard
+              My Profile
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{%url 'addphoto'%}">
+          <hr class="text-light">
+          <li class="nav-item text-center">
+            <a class="nav-link active text-light" aria-current="page" href="{%url 'myuploads'%}">
+              <span data-feather="home" class="align-text-bottom"></span>
+              My Uploads
+            </a>
+          </li>
+          <hr class="text-light">
+          <li class="nav-item text-center">
+            <a class="nav-link text-light" href="{%url 'addphoto'%}">
               <span data-feather="file" class="align-text-bottom"></span>
               Add Photo
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart" class="align-text-bottom"></span>
-              Products
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="users" class="align-text-bottom"></span>
-              Customers
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-              Reports
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="layers" class="align-text-bottom"></span>
-              Integrations
-            </a>
-          </li>
-        </ul>
 
-        <h6
-          class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-          <span>Saved reports</span>
-          <a class="link-secondary" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle" class="align-text-bottom"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text" class="align-text-bottom"></span>
-              Current month
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text" class="align-text-bottom"></span>
-              Last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text" class="align-text-bottom"></span>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text" class="align-text-bottom"></span>
-              Year-end sale
-            </a>
-          </li>
         </ul>
       </div>
+      <hr>
+
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -97,8 +51,50 @@
           </button>
         </div>
       </div>
-      <!-- Section one -->
       {%if page1%}
+      <!-- Section 0 =============Edit profile ============= -->
+      <!-- first part -->
+      <div>
+        <h1>Welcome to your dashboard {{request.user.username}}</h1>
+        <!-- Edit profile part -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          data-bs-whatever="@mdo">Edit Profile</button>
+        <!-- Edit profile end -->
+      </div>
+      <!-- first part end -->
+
+      <!-- model form --======== -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">First Name:</label><br>
+                  {{editprofile.first_name}}
+                </div>
+                <div class="mb-3">
+                  <label for="message-text" class="col-form-label">Last Name:</label> <br>
+                  {{editprofile.first_name}}
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- model form end ====-->
+      <!-- section 0 end ================================================== -->
+      {%endif%}
+      <!-- Section one -->
+      {%if page11%}
       {%include 'messages/messages.html'%}
       <h2>My Uploaded Photo List</h2>
 
@@ -138,6 +134,8 @@
       </form>
       {%endif%}
       <!-- Section 2 end -->
+
+
     </main>
   </div>
 </div>
