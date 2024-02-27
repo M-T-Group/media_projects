@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Image
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
@@ -11,8 +11,8 @@ from .forms import AddPhotoForm
 
 
 def index(request):
-    images = Image.objects.all().order_by('id')
-    paginator = Paginator(images, 4)
+    images = Image.objects.all().order_by('-id')
+    paginator = Paginator(images, 8)
     page = request.GET.get('page')
     paged_images = paginator.get_page(page)
     image_number = images.count()
