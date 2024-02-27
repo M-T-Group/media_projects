@@ -5,7 +5,8 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-from .forms import AddPhotoForm
+from .forms import AddPhotoForm, EditProfile
+from django.contrib.auth.decorators import login_required
 
 # Home Page
 
@@ -42,6 +43,7 @@ def DownloadView(request, pk):
 # Delete image
 
 
+@login_required(login_url='login')
 def DeleteView(request, pk):
     image = Image.objects.get(id=pk)
     image.delete()
@@ -67,15 +69,24 @@ def ContactView(request):
 # Dashboard view
 
 
+@login_required(login_url='login')
 def DashboardView(request):
     page1 = 1
-    images = Image.objects.all()
-    context = {'images': images, 'page1': page1}
+    editprofile = EditProfile()
+    context = {'editprofile': editprofile, 'page1': page1}
     return render(request, 'dashboard.html', context)
 
 # Add photo form
 
 
+def MyUploadsView(request):
+    page11 = 11
+    images = Image.objects.all()
+    context = {'images': images, 'page11': page11}
+    return render(request, 'dashboard.html', context)
+
+
+@login_required(login_url='login')
 def AddPhotoView(request):
     page2 = 2
     photoform = AddPhotoForm()
@@ -103,9 +114,15 @@ def LoginView(request):
         password = request.POST['password']
 
         user = authenticate(username=username, password=password)
-        login(request, user)
-        messages.success(request, 'Login Successfully..!')
-        return redirect('dashboard')
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Login Successfully..!')
+            return redirect('dashboard')
+
+        else:
+            messages.error(request, 'Invalid credentials..!')
+            return redirect('login')
+
     return render(request, 'accounts/login.html')
 
 # Sign Up page

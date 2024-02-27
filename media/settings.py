@@ -130,6 +130,8 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
+# login url
+LOGIN_URL = 'login/'
 # Crispy-forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
